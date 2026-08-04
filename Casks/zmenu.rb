@@ -1,6 +1,6 @@
 cask "zmenu" do
-  version "0.1.0"
-  sha256 "0fb463f7853df564ec134faba08eb0a4bdb7dde7604bb75e5b198cd62573dafb"
+  version "0.1.1"
+  sha256 "abbd5651f6a1ce37854fb3b128c5e13dca910a1b71db097fcd15fdf93dfe5cab"
 
   url "https://github.com/angelozangari/homebrew-tap/releases/download/zmenu-v#{version}/zmenu-#{version}.zip"
   name "zmenu"
