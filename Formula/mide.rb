@@ -3,8 +3,8 @@ class Mide < Formula
   homepage "https://github.com/angelozangari/MiDe"
   # A private repository, so this clones over SSH with your own keys rather
   # than downloading a release asset.
-  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.2"
-  version "0.1.2"
+  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.3"
+  version "0.1.3"
 
   depends_on "node" => :build
   depends_on "python@3.13"
@@ -17,7 +17,8 @@ class Mide < Formula
     libexec.install "server.py", "mide", "public", "samples"
     (bin/"mide").write_env_script libexec/"mide",
                                   MIDE_ROOT:   libexec,
-                                  MIDE_PYTHON: formula_opt_bin("python@3.13")/"python3"
+                                  # Homebrew ships only versioned interpreters: there is no python3 here.
+                                  MIDE_PYTHON: formula_opt_bin("python@3.13")/"python3.13"
   end
 
   def caveats
