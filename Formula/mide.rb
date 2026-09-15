@@ -3,8 +3,8 @@ class Mide < Formula
   homepage "https://github.com/angelozangari/MiDe"
   # A private repository, so this clones over SSH with your own keys rather
   # than downloading a release asset.
-  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.0"
-  version "0.1.0"
+  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.1"
+  version "0.1.1"
 
   depends_on "node" => :build
   depends_on "python@3.13"
@@ -22,21 +22,24 @@ class Mide < Formula
 
   def caveats
     <<~EOS
-      Choose the directory to edit once, and it is remembered:
+      Point MiDe at a directory once:
         mide ~/Notes
 
       Then just:
         mide
 
-      To try the bundled sample documents without changing that:
-        mide samples
+      The directory lives in ~/.config/mide/config.json and is read on every
+      run, so editing that file is the same as passing the directory again.
+
+      To try the bundled sample documents without changing it:
+        mide --samples
     EOS
   end
 
   test do
-    assert_match "serve the remembered directory", shell_output("#{bin}/mide --help")
+    assert_match "serve the configured directory", shell_output("#{bin}/mide --help")
     # Without a remembered directory it must refuse rather than pick one.
     output = shell_output("#{bin}/mide --no-open 2>&1", 1)
-    assert_match "no directory remembered", output
+    assert_match "no directory configured", output
   end
 end
