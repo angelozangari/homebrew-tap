@@ -3,8 +3,8 @@ class Mide < Formula
   homepage "https://github.com/angelozangari/MiDe"
   # A private repository, so this clones over SSH with your own keys rather
   # than downloading a release asset.
-  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.1"
-  version "0.1.1"
+  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.2"
+  version "0.1.2"
 
   depends_on "node" => :build
   depends_on "python@3.13"
@@ -22,16 +22,19 @@ class Mide < Formula
 
   def caveats
     <<~EOS
-      Point MiDe at a directory once:
-        mide ~/Notes
+      Name the directory to edit in ~/.config/mide/config.json:
 
-      Then just:
+        mkdir -p ~/.config/mide
+        echo '{"documents_dir": "~/Notes"}' > ~/.config/mide/config.json
+
+      Then:
         mide
 
-      The directory lives in ~/.config/mide/config.json and is read on every
-      run, so editing that file is the same as passing the directory again.
+      Every run reads that file, and it is the only place the directory is set.
+      Edit it later with:
+        $EDITOR "$(mide --config)"
 
-      To try the bundled sample documents without changing it:
+      To try the bundled sample documents instead:
         mide --samples
     EOS
   end
@@ -40,6 +43,6 @@ class Mide < Formula
     assert_match "serve the configured directory", shell_output("#{bin}/mide --help")
     # Without a remembered directory it must refuse rather than pick one.
     output = shell_output("#{bin}/mide --no-open 2>&1", 1)
-    assert_match "no directory configured", output
+    assert_match "no configuration at", output
   end
 end
