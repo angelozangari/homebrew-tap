@@ -3,11 +3,8 @@ class Mide < Formula
   homepage "https://github.com/angelozangari/MiDe"
   # A private repository, so this clones over SSH with your own keys rather
   # than downloading a release asset.
-  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.10"
-  version "0.1.10"
-  # The service block is a formula-only change, so the keg must be rebuilt for
-  # brew services to see it.
-  revision 1
+  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.12"
+  version "0.1.12"
 
   depends_on "node" => :build
   depends_on "python@3.13"
@@ -25,7 +22,7 @@ class Mide < Formula
   end
 
   # brew services drives launchd, so an installed copy needs no script of its
-  # own. service/install.sh in the repository covers a checkout and Linux.
+  # own. scripts/service.sh in the repository covers a checkout and Linux.
   service do
     run [opt_bin/"mide", "--no-open"]
     run_type :immediate
