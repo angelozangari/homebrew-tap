@@ -5,6 +5,9 @@ class Mide < Formula
   # than downloading a release asset.
   url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.10"
   version "0.1.10"
+  # The service block is a formula-only change, so the keg must be rebuilt for
+  # brew services to see it.
+  revision 1
 
   depends_on "node" => :build
   depends_on "python@3.13"
