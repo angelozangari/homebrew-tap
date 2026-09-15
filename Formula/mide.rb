@@ -3,8 +3,8 @@ class Mide < Formula
   homepage "https://github.com/angelozangari/MiDe"
   # A private repository, so this clones over SSH with your own keys rather
   # than downloading a release asset.
-  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.7"
-  version "0.1.7"
+  url "git@github.com:angelozangari/MiDe.git", using: :git, tag: "v0.1.8"
+  version "0.1.8"
 
   depends_on "node" => :build
   depends_on "python@3.13"
