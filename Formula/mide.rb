@@ -21,6 +21,16 @@ class Mide < Formula
                                   MIDE_PYTHON: formula_opt_bin("python@3.13")/"python3.13"
   end
 
+  # brew services drives launchd, so an installed copy needs no script of its
+  # own. service/install.sh in the repository covers a checkout and Linux.
+  service do
+    run [opt_bin/"mide", "--no-open"]
+    run_type :immediate
+    keep_alive true
+    log_path var/"log/mide.log"
+    error_log_path var/"log/mide.log"
+  end
+
   def caveats
     <<~EOS
       Name the directory to edit in ~/.config/mide/config.json:
@@ -37,6 +47,9 @@ class Mide < Formula
 
       To try the bundled sample documents instead:
         mide --samples
+
+      To keep it running and start it again at login:
+        brew services start mide
     EOS
   end
 
